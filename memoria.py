@@ -1,9 +1,9 @@
 class Memoria:
     def __init__(self):
-        self.tamanho_total = 128
-        self.bloco_tamanho = 2
+        self.tamanho_total = 128  # em KB
+        self.bloco_tamanho = 2    # em KB
         self.num_blocos = self.tamanho_total // self.bloco_tamanho
-        self.blocos = [None] * self.num_blocos
+        self.blocos = [None] * self.num_blocos  # memória inicial vazia
         self.processos_ativos = []  # Lista FIFO: [(nome, tamanho)]
 
     def alocar(self, processo, algoritmo):
@@ -14,7 +14,10 @@ class Memoria:
             for i in range(posicao, posicao + blocos_necessarios):
                 self.blocos[i] = processo.nome
             self.processos_ativos.append((processo.nome, processo.tamanho))
-            print(f"Processo {processo.nome} alocado com sucesso.")
+            print(
+                f"Processo {processo.nome} alocado com sucesso "
+                f"nos blocos {posicao + 1} até {posicao + blocos_necessarios }."
+            )
             return True
         else:
             return False
